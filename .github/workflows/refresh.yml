@@ -1,0 +1,52 @@
+name: Refresh and publish UtaNumber data
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 5,13,21 * * *'
+  push:
+    branches: [main]
+    paths: [refresh.mjs, seed.json.gz, package.json, package-lock.json, .github/workflows/refresh.yml]
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: utanumber-data-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Refresh official metadata and validate last good snapshot
+        id: refresh
+        continue-on-error: true
+        run: npm run refresh
+      - name: Preserve validated state and any access-block record
+        if: always()
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add state.json.gz
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh verified TJ metadata"
+            git push
+          fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+      - name: Publish verified public JSON
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Report source refresh failure after publishing fallback
+        if: steps.refresh.outcome == 'failure'
+        run: exit 1
