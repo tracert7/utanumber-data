@@ -7,3 +7,15 @@ TJ 신규 일본곡·JPOP TOP100 메타데이터 전용 서비스. TJ미디어 �
 `npm ci && npm run refresh`로 갱신합니다. 웹사이트에서 발급되는 익명CSRF 절차와 robots를 지키며401/403/429에서 중단합니다. 공급사의 데이터 재사용 허락을 취득했다는 뜻이 아닙니다.
 
 공개되는 파일은 명시적으로 준비한 배포 파일이며 원본 앱 프로젝트나 개인 자료를 통째로 올리지 않습니다. 라이선스 표시는 제공사 원본 데이터에 재허락을 부여하지 않습니다.
+
+## 서버 자동 점검
+
+`.github/workflows/health.yml`이 GitHub 서버에서 매시간37분 및 데이터 갱신 작업 종료 직후 실행됩니다. PC나 Codex를 켜둘 필요가 없습니다. GitHub 예약은 지연될 수 있습니다.
+
+`node monitor.mjs`는 공개된 discovery.json만 읽습니다. 전체 스키마·TOP100100곡·번호/순위 중복·각 목록의12시간 신선도·소스 오류·공개 CORS를 검사하며 TJ 수집이나 배포는 하지 않습니다. 신곡이0곡인 달도 정상 구조이면 허용합니다. 네트워크/5xx는 최대3번,25초 제한과 대기 간격으로 확인하며401/403/429는 재시도하지 않습니다.
+
+결과는 Actions 실행 요약 및14일 보관 cloud-health artifact에서 확인합니다. 실패는 workflow 실패로 표시되며 GitHub Actions의 기존 실패 전용 이메일 알림 설정을 따릅니다. 새 API키·외부 알림 서비스·유료 가입은 사용하지 않습니다.
+
+첫 서버 실행 검증: https://github.com/tracert7/utanumber-data/actions/runs/39976992851 — 2026-10-24 00:17 KST PASS, 신곡17·TOP100100·오류0. 매시간/갱신 후의 예약 실행은 이후 실행 내역에서 확인할 수 있습니다.
+
+점검만 중단하려면 Actions에서 Monitor UtaNumber public data workflow를 Disable합니다. 재개는 Enable합니다. 이전 상태로 되돌릴 때는 health.yml만 되돌리거나 중단하며 refresh.yml과 state.json.gz는 지우지 않습니다. 기존 로컬 Codex top100 점검은 서버 성공 확인 후 삭제했습니다. 로컬 수동 점검은 계속 가능하며 서버 점검과 중복 예약하지 않습니다.
