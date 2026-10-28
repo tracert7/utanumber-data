@@ -2,7 +2,7 @@ name: Refresh and publish UtaNumber data
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 5,13,21 * * *'
+    - cron: '17 1,5,9,13,21 * * *'
   push:
     branches: [main]
     paths: [refresh.mjs, seed.json.gz, package.json, package-lock.json, .github/workflows/refresh.yml]
@@ -30,6 +30,36 @@ jobs:
         id: refresh
         continue-on-error: true
         run: npm run refresh
+      - name: Align refresh schedule metadata
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs/promises';
+          import path from 'node:path';
+          import {gzipSync,gunzipSync} from 'node:zlib';
+          export function withRefreshHours(feed,hours){
+           if(!Array.isArray(hours)||!hours.length||new Set(hours).size!==hours.length||hours.some(h=>!Number.isInteger(h)||h<0||h>23))throw Error('Invalid refresh hours');
+           if(feed?.schemaVersion!==1||feed.schedule?.timezone!=='Asia/Seoul'||feed.top100?.entries?.length!==100)throw Error('Invalid discovery snapshot');
+           const ranks=feed.top100.entries.map(e=>e.rank),numbers=feed.top100.entries.map(e=>e.song?.registrations?.tj?.number);
+           if(new Set(ranks).size!==100||ranks.some(r=>!Number.isInteger(r)||r<1||r>100)||new Set(numbers).size!==100||numbers.some(n=>!/^\d+$/.test(n)))throw Error('Invalid chart identity');
+           return {...feed,schedule:{timezone:'Asia/Seoul',hours:[...hours]}};
+          }
+          export async function alignPublishedSchedule(root,hours,{dryRun=false}={}){
+           const changes=[];
+           for(const name of ['site/discovery.json','public/discovery.json','data/discovery/snapshot.json']){
+            const filename=path.join(root,name);let text;try{text=await fs.readFile(filename,'utf8');}catch(e){if(e.code==='ENOENT'&&name!=='site/discovery.json')continue;throw e;}
+            const next=withRefreshHours(JSON.parse(text),hours);changes.push({filename,name,bytes:Buffer.from(JSON.stringify(next,null,2)+'\n')});
+           }
+           let compressed;try{compressed=await fs.readFile(path.join(root,'state.json.gz'));}catch(e){if(e.code!=='ENOENT')throw e;}
+           if(compressed){const state=JSON.parse(gunzipSync(compressed).toString('utf8'));for(const key of ['public/discovery.json','data/discovery/snapshot.json'])if(state[key])state[key]=withRefreshHours(state[key],hours);changes.push({filename:path.join(root,'state.json.gz'),name:'state.json.gz',bytes:gzipSync(Buffer.from(JSON.stringify(state)),{level:9})});}
+           // Validate every input before writing anything. The provider times, numbers,
+           // rankings, errors and block records are preserved; this edits schedule metadata only.
+           if(!dryRun)for(const c of changes){await fs.writeFile(c.filename+'.schedule.tmp',c.bytes);await fs.rename(c.filename+'.schedule.tmp',c.filename);}
+           return {scheduleAligned:!dryRun,dryRun,hours,files:changes.map(c=>c.name)};
+          }
+          if(process.argv[1]?.endsWith('align-refresh-schedule.mjs'))console.log(JSON.stringify(await alignPublishedSchedule(process.cwd(),[6,10,14,18,22],{dryRun:process.argv.includes('--dry-run')})));
+          
+          console.log(JSON.stringify(await alignPublishedSchedule(process.cwd(),[6,10,14,18,22])));
+          NODE
       - name: Preserve validated state and any access-block record
         if: always()
         run: |
