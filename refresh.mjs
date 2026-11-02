@@ -1,3 +1,44 @@
+// UtaNumber chart availability repair 2026-11-02
+// scripts/tj-response.ts
+function decodeTjPublicResponse(text) {
+  let value;
+  try {
+    value = JSON.parse(text);
+  } catch {
+    throw Error("Expected official JSON, received invalid data or authentication page");
+  }
+  const code = String(value?.resultCode ?? "missing"), safeCode = /^[a-zA-Z0-9_-]{1,20}$/.test(code) ? code : "invalid";
+  if (code !== "99") throw Error(`TJ response rejected (resultCode=${safeCode}); no retry or access workaround`);
+  const data = value.resultData, count = data?.itemsTotalCount;
+  if (count === void 0 || count === null || count === "" || !/^\d+$/.test(String(count))) throw Error("TJ response missing a valid total count");
+  if (!Array.isArray(data?.items)) {
+    if (Number(count) === 0 && (data?.items === void 0 || data?.items === null)) return [];
+    throw Error(`TJ response list missing (resultCode=99, total=${Number(count)})`);
+  }
+  if (Number(count) !== data.items.length) throw Error("TJ response is incomplete");
+  return data.items;
+}
+function latestCompletedChartPeriod(day) {
+  const end = /* @__PURE__ */ new Date(day + "T00:00:00Z");
+  end.setUTCDate(end.getUTCDate() - 1);
+  const endDate = end.toISOString().slice(0, 10);
+  return { startDate: endDate.slice(0, 7) + "-01", endDate };
+}
+async function readAvailableChart(client, day) {
+  const current = { startDate: day.slice(0, 7) + "-01", endDate: day };
+  const read = (period) => client.json("/legacy/api/topAndHot100", { chartType: "TOP", strType: "3", searchStartDate: period.startDate, searchEndDate: period.endDate });
+  const items = await read(current);
+  if (items.length) return { ...current, items };
+  const completed = latestCompletedChartPeriod(day), fallback = await read(completed);
+  if (!fallback.length) throw Error("Official TOP100 not yet available for current or completed period; preserve last verified chart");
+  return { ...completed, items: fallback };
+}
+export {
+  decodeTjPublicResponse,
+  latestCompletedChartPeriod,
+  readAvailableChart
+};
+
 // deploy/cloud-entry.ts
 import fs4 from "node:fs/promises";
 import { gzipSync, gunzipSync } from "node:zlib";
@@ -261,17 +302,7 @@ var TJPublicClient = class {
     return response.text();
   }
   async json(path3, fields) {
-    const text = await this.request(path3, fields);
-    let value;
-    try {
-      value = JSON.parse(text);
-    } catch {
-      throw Error("Expected official JSON, received invalid data or authentication page");
-    }
-    if (String(value.resultCode) !== "99" || !Array.isArray(value.resultData?.items)) throw Error("Unexpected TJ response schema");
-    const data = value.resultData;
-    if (Number(data.itemsTotalCount) !== data.items.length) throw Error("TJ response is incomplete");
-    return data.items;
+    return decodeTjPublicResponse(await this.request(path3, fields));
   }
   get count() {
     return this.requests;
@@ -393,11 +424,12 @@ async function refreshDiscovery({ dryRun = false, now = /* @__PURE__ */ new Date
       await fs2.writeFile(root + "/robots.txt", await client.init());
       await client.request("/chart/top100");
       try {
-        const rows2 = parseRows(await client.json("/legacy/api/topAndHot100", { chartType: "TOP", searchStartDate: month + "-01", searchEndDate: day, strType: "3" }), "top100", month);
+        const chart = await readAvailableChart(client, day);
+        const rows2 = parseRows(chart.items, "top100", chart.startDate.slice(0, 7));
         const checkedAt = (/* @__PURE__ */ new Date()).toISOString(), evidenceFile = `discovery-chart-${runId}.json`, sourceUrl = "https://www.tjmedia.com/chart/top100";
-        await atomicJson(root + "/history/" + evidenceFile, { sourceUrl, checkedAt, parameters: { chartType: "TOP", strType: "3", searchStartDate: month + "-01", searchEndDate: day }, rows: rows2 });
-        await atomicJson("data/evidence/" + evidenceFile, { company: "tj", query: `JPOP TOP100 ${month}-01 to ${day}`, url: sourceUrl, checkedAt, httpStatus: 200, scope: "Official website anonymous JPOP chart query, strType=3, chartType=TOP; ranks in requested period", rows: rows2.map(({ number, title, artist }) => ({ number, title, artist })) });
-        feed2.top100 = { startDate: month + "-01", endDate: day, checkedAt, sourceUrl, entries: rows2.map((row) => ({ rank: row.rank, song: localizeRow(row, known.get(row.number), artists, meanings, checkedAt, evidenceFile, sourceUrl) })).sort((a, b) => a.rank - b.rank) };
+        await atomicJson(root + "/history/" + evidenceFile, { sourceUrl, checkedAt, parameters: { chartType: "TOP", strType: "3", searchStartDate: chart.startDate, searchEndDate: chart.endDate }, rows: rows2 });
+        await atomicJson("data/evidence/" + evidenceFile, { company: "tj", query: `JPOP TOP100 ${chart.startDate} to ${chart.endDate}`, url: sourceUrl, checkedAt, httpStatus: 200, scope: "Official website anonymous JPOP chart query, strType=3, chartType=TOP; ranks in requested period", rows: rows2.map(({ number, title, artist }) => ({ number, title, artist })) });
+        feed2.top100 = { startDate: chart.startDate, endDate: chart.endDate, checkedAt, sourceUrl, entries: rows2.map((row) => ({ rank: row.rank, song: localizeRow(row, known.get(row.number), artists, meanings, checkedAt, evidenceFile, sourceUrl) })).sort((a, b) => a.rank - b.rank) };
         for (const row of rows2) classification[row.number] = { title: row.title, artist: row.artist, japanese: true, checkedAt, sourceUrl };
       } catch (error) {
         addError("top100", error);
