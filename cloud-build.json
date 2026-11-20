@@ -1,9 +1,9 @@
 {
-  "build": "2026-11-20-title-policy-sync",
-  "builtAt": "2026-11-19T16:56:14.940Z",
-  "sourceCommit": "63767ce2dfc68a3849b4e8bfee9bb44955aa5416",
+  "build": "2026-11-20-monthly-korean-review",
+  "builtAt": "2026-11-20T07:37:21.437Z",
+  "sourceCommit": "ea63ed155205b0e80e47766b1b900e6281fa84af",
   "catalogSongs": 6645,
-  "retiredMeanings": 4210,
+  "retiredMeanings": 0,
   "seedFiles": [
     "data/catalog.json",
     "data/curated-search-aliases.json"
@@ -12,7 +12,7 @@
   "inputs": [
     {
       "file": "scripts/prepare-cloud-title-repair.ts",
-      "sha256": "7385d4583cbd754c840ea40dbcc1ff07ee1c14cfd39a0bbabac753ea2eae4d90"
+      "sha256": "c8f4affcb8119c1394675459b3295670d64ffc0bf2183ae0d9cb333c3994d254"
     },
     {
       "file": "scripts/refresh-discovery.ts",
@@ -32,7 +32,7 @@
     },
     {
       "file": "src/researched-titles.ts",
-      "sha256": "4813efa0d61818a0711b992761e6b832dc5f3af9de72e47d1dc7f652a9b343f4"
+      "sha256": "2aee7a2d8cfd820108644371fa3b98e56584525b9f54a9604cb910b4eacd73fb"
     },
     {
       "file": "data/researched-titles.ko.json",
@@ -44,7 +44,7 @@
     },
     {
       "file": "data/discovery-researched-titles.ko.json",
-      "sha256": "625e9836ed7893481b9bf3539c8026f1c1f4a6dc8ea5293c5204ad75204df028"
+      "sha256": "3e5b732a2c386f79a875924c99e37fdf7c8a4da41ae73c1d3e09eef5c729d0bc"
     },
     {
       "file": "src/domain.ts",
@@ -70,18 +70,18 @@
   "outputs": [
     {
       "file": "refresh.mjs",
-      "sha256": "e4da317cfb1d4f7e729bc6fcb7777d142f4dc35854f7daccc293fd2695b3bc17",
-      "bytes": 5739936
+      "sha256": "90f7bc28e5a7dd7fd62b1d3eda8c14d249f3dbc6319afc193907742d117c54f8",
+      "bytes": 5758441
     },
     {
       "file": "monitor.mjs",
-      "sha256": "67ae7d17eb642df2dc6fbcfb611fb4276381317c437767af21efed4d6f68ce5f",
-      "bytes": 5708707
+      "sha256": "1ac67ba3ffc78cbfdd56a04d32d4cad8b360680198618827cca03d930bbe24ca",
+      "bytes": 5726797
     },
     {
       "file": "seed.json.gz",
-      "sha256": "ba8a540aa062b48a04ce0968bdde78b1ac50063d8eae80ecbbc334129e91290d",
-      "bytes": 730368
+      "sha256": "ead9d6f30b11855ad981ebbc15508c0965ac152d7030aff6acff2087c930d76b",
+      "bytes": 730330
     },
     {
       "file": "cloud-self-test.mjs",

@@ -96799,8 +96799,8 @@ var edited_readings_ko_default = {
 // data/discovery-researched-titles.ko.json
 var discovery_researched_titles_ko_default = {
   schemaVersion: 1,
-  reviewedOn: "2026-10-26",
-  scope: "\uAE30\uBCF8 6645\uACE1 \uBC16\uC758 \uC2E0\uACE1/\uCC28\uD2B8 \uC544\uCE74\uC774\uBE0C 5\uACE1",
+  reviewedOn: "2026-11-20",
+  scope: "\uAE30\uBCF8 6645\uACE1 \uBC16\uC758 \uC2E0\uACE1\xB7\uCC28\uD2B8 \uC544\uCE74\uC774\uBE0C 27\uACE1 (2026-11 \uC774\uBC88 \uB2EC \uC2E0\uACE1 19\uACE1 \uAC80\uC218 \uD3EC\uD568)",
   entries: [
     {
       songId: "tj-90185",
@@ -96966,6 +96966,365 @@ var discovery_researched_titles_ko_default = {
           note: "\uC6D0\uC81C\xB7\uAC00\uC218\uC640 \uACF5\uAC1C \uD55C\uAD6D\uC5B4 \uACE1\uBA85 \uD45C\uAE30\uB97C \uB300\uC870. \uAC00\uC0AC \uBCF8\uBB38\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uBC88\uD638 \uC99D\uAC70\uB294 \uC6D0\uBCF8 \uACF5\uC2DD \uC218\uC9D1 \uC790\uB8CC\uB97C \uC720\uC9C0."
         }
       ]
+    },
+    {
+      songId: "tj-90264",
+      number: "90264",
+      titleOriginal: "\u3046\u3055\u304E\u30E9\u30C3\u30D7 (\u30EA\u30BA\u30E0\u611F\u306E\u3042\u308B\u8005\u305F\u3061ver.)('\u6620\u753B\u3061\u3044\u304B\u308F \u4EBA\u9B5A\u306E\u5CF6\u306E\u3072\u307F\u3064' OST)",
+      artistOriginal: "\u3046\u3055\u304E(CV:\u5C0F\u6FA4\u4E9C\u674E),\u30E2\u30E2\u30F3\u30AC(CV:\u4E95\u53E3\u88D5\u9999) \u4ED62\u540D",
+      artistKo: "\uC6B0\uC0AC\uAE30(CV:\uC624\uC790\uC640 \uC544\uB9AC), \uBAA8\uBABD\uAC00(CV:\uC774\uAD6C\uCE58 \uC720\uCE74) \uC6782\uBA85",
+      displayTitle: "\uC6B0\uC0AC\uAE30 \uB7A9 (\uB9AC\uB4EC\uAC10 \uC788\uB294 \uC790\uB4E4 ver.)",
+      subtitle: null,
+      aliases: [
+        "\uC6B0\uC0AC\uAE30 \uB7A9"
+      ],
+      sources: [
+        {
+          publisher: "\uC9F1\uC9F1\uC774\uC758 \uC9F1\uC9F1\uD55C \uC77C\uC0C1",
+          url: "https://j-pop-playlist.tistory.com/1036",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
+    },
+    {
+      songId: "tj-90229",
+      number: "90229",
+      titleOriginal: "\u30CE\u30F3\u30D6\u30EC\u30B9\u30FB \u30AA\u30D6\u30EA\u30FC\u30B8\u30E5",
+      artistOriginal: "\u30D4\u30CE\u30AD\u30AA\u30D4\u30FC(Feat.\u521D\u97F3\u30DF\u30AF)",
+      artistKo: "\uD53C\uB178\uD0A4\uC624\uD53C (Feat. \uD558\uCE20\uB124 \uBBF8\uCFE0)",
+      displayTitle: "\uB17C\uBE0C\uB808\uC2A4 \uC624\uBE14\uB9AC\uC8FC",
+      subtitle: null,
+      aliases: [],
+      sources: [
+        {
+          publisher: "\uC9F1\uC9F1\uC774\uC758 \uC9F1\uC9F1\uD55C \uC77C\uC0C1",
+          url: "https://j-pop-playlist.tistory.com/423",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
+    },
+    {
+      songId: "tj-90224",
+      number: "90224",
+      titleOriginal: "\u306A\u3044\u3082\u306E\u306D\u3060\u308A",
+      artistOriginal: "KANA-BOON",
+      artistKo: "\uCE74\uB098\uBD84",
+      displayTitle: "\uC0DD\uB5BC \uBD80\uB9AC\uAE30",
+      subtitle: null,
+      aliases: [
+        "\uB098\uC774\uBAA8\uB178\uB124\uB2E4\uB9AC"
+      ],
+      sources: [
+        {
+          publisher: "\uC9F1\uC9F1\uC774\uC758 \uC9F1\uC9F1\uD55C \uC77C\uC0C1",
+          url: "https://j-pop-playlist.tistory.com/691",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
+    },
+    {
+      songId: "tj-90221",
+      number: "90221",
+      titleOriginal: "soramimi",
+      artistOriginal: "Vaundy",
+      artistKo: "\uBC14\uC6B4\uB514",
+      displayTitle: "\uC18C\uB77C\uBBF8\uBBF8",
+      subtitle: null,
+      aliases: [],
+      sources: [
+        {
+          publisher: "\uB274\uC2DC\uC2A4 \xB7 \uBC14\uC6B4\uB514 \uB0B4\uD55C \uACF5\uC5F0 \uAE30\uC0AC",
+          url: "https://www.newsis.com/view/NISX20260921_0003799026",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
+    },
+    {
+      songId: "tj-90219",
+      number: "90219",
+      titleOriginal: "C.h.a.o.s.m.y.t.h.",
+      artistOriginal: "ONE OK ROCK",
+      artistKo: "\uC6D0 \uC624\uD06C \uB85D",
+      displayTitle: "\uCE74\uC624\uC2A4\uBBF8\uC2A4",
+      subtitle: null,
+      aliases: [],
+      sources: [
+        {
+          publisher: "\uC774\uD22C\uB370\uC774 \xB7 XMF 2026 \uACF5\uC5F0 \uAE30\uC0AC",
+          url: "https://www.etoday.co.kr/news/view/2632380",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
+    },
+    {
+      songId: "tj-90218",
+      number: "90218",
+      titleOriginal: "\u611B\u3057\u3066\u611B\u3057\u3066\u611B\u3057\u3066",
+      artistOriginal: "\u304D\u304F\u304A(Feat.\u521D\u97F3\u30DF\u30AF)",
+      artistKo: "\uD0A4\uCFE0\uC624 (Feat. \uD558\uCE20\uB124 \uBBF8\uCFE0)",
+      displayTitle: "\uC0AC\uB791\uD574 \uC918 \uC0AC\uB791\uD574 \uC918 \uC0AC\uB791\uD574 \uC918",
+      subtitle: null,
+      aliases: [
+        "\uC544\uC774\uC2DC\uD14C \uC544\uC774\uC2DC\uD14C \uC544\uC774\uC2DC\uD14C"
+      ],
+      sources: [
+        {
+          publisher: "\uC9F1\uC9F1\uC774\uC758 \uC9F1\uC9F1\uD55C \uC77C\uC0C1",
+          url: "https://j-pop-playlist.tistory.com/662",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
+    },
+    {
+      songId: "tj-90246",
+      number: "90246",
+      titleOriginal: "\u518D\u4F1A(\u30A2\u30CB\u30E1 '\u5149\u304C\u6B7B\u3093\u3060\u590F' OP)",
+      artistOriginal: "Vaundy",
+      artistKo: "\uBC14\uC6B4\uB514",
+      displayTitle: "\uC7AC\uD68C",
+      subtitle: null,
+      aliases: [
+        "\uC0AC\uC774\uCE74\uC774"
+      ],
+      sources: [
+        {
+          publisher: "\uC9F1\uC9F1\uC774\uC758 \uC9F1\uC9F1\uD55C \uC77C\uC0C1",
+          url: "https://j-pop-playlist.tistory.com/145",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
+    },
+    {
+      songId: "tj-90245",
+      number: "90245",
+      titleOriginal: "\u307F\u3080\u304B\u30A5\u308F\u30CA\u30A4\u30B9\u30C8\u30E9\u30A4",
+      artistOriginal: "\u306C\u306C\u306C\u306C\u306C\u306C\u306C\u306C\u306C\u306C...(Feat.\u521D\u97F3\u30DF\u30AF)",
+      artistKo: "\uB204\uB204\uB204\uB204\uB204\uB204\uB204\uB204\uB204\uB204\u2026 (Feat. \uD558\uCE20\uB124 \uBBF8\uCFE0)",
+      displayTitle: "\uBBF8\uBB34\uCE74\uC640 \uB098\uC774\uC2A4 \uD2B8\uB77C\uC774",
+      subtitle: null,
+      aliases: [],
+      sources: [
+        {
+          publisher: "\uC9F1\uC9F1\uC774\uC758 \uC9F1\uC9F1\uD55C \uC77C\uC0C1",
+          url: "https://j-pop-playlist.tistory.com/1167",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
+    },
+    {
+      songId: "tj-90217",
+      number: "90217",
+      titleOriginal: "\u30E0\u30FC\u30F3\u30E9\u30A4\u30C8",
+      artistOriginal: "\u661F\u8857\u3059\u3044\u305B\u3044",
+      artistKo: "\uD638\uC2DC\uB9C8\uCE58 \uC2A4\uC774\uC138\uC774",
+      displayTitle: "\uBB38\uB77C\uC774\uD2B8",
+      subtitle: null,
+      aliases: [],
+      sources: [
+        {
+          publisher: "\uC9F1\uC9F1\uC774\uC758 \uC9F1\uC9F1\uD55C \uC77C\uC0C1",
+          url: "https://j-pop-playlist.tistory.com/1544",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
+    },
+    {
+      songId: "tj-90216",
+      number: "90216",
+      titleOriginal: "\u30A2\u30EA\u30AB",
+      artistOriginal: "\u30DE\u30EB\u30B7\u30A3",
+      artistKo: "\uB9C8\uB974\uC2DC",
+      displayTitle: "\uC788\uB294 \uACF3",
+      subtitle: null,
+      aliases: [
+        "\uC544\uB9AC\uCE74"
+      ],
+      sources: [
+        {
+          publisher: "\uC9F1\uC9F1\uC774\uC758 \uC9F1\uC9F1\uD55C \uC77C\uC0C1",
+          url: "https://j-pop-playlist.tistory.com/341",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
+    },
+    {
+      songId: "tj-90215",
+      number: "90215",
+      titleOriginal: "\u304F\u3064\u305A\u308C('\u6620\u753B\u3061\u3044\u304B\u308F \u4EBA\u9B5A\u306E\u5CF6\u306E\u3072\u307F\u3064' OST)",
+      artistOriginal: "\u30CF\u30C1\u30EF\u30EC(CV:\u7530\u4E2D\u8AA0\u4EBA)",
+      artistKo: "\uD558\uCE58\uC640\uB808(CV:\uD0C0\uB098\uCE74 \uB9C8\uCF54\uD1A0)",
+      artistKoOverride: true,
+      displayTitle: "\uC2E0\uBC1C \uB54C\uBB38\uC5D0 \uB09C \uC0C1\uCC98",
+      subtitle: null,
+      aliases: [
+        "\uCFE0\uCE20\uC988\uB808"
+      ],
+      sources: [
+        {
+          publisher: "\uC9F1\uC9F1\uC774\uC758 \uC9F1\uC9F1\uD55C \uC77C\uC0C1",
+          url: "https://j-pop-playlist.tistory.com/1036",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
+    },
+    {
+      songId: "tj-90214",
+      number: "90214",
+      titleOriginal: "Loneliness",
+      artistOriginal: "Mrs. GREEN APPLE",
+      artistKo: "\uBBF8\uC138\uC2A4 \uADF8\uB9B0 \uC560\uD50C",
+      displayTitle: "\uB860\uB9AC\uB124\uC2A4",
+      subtitle: null,
+      aliases: [],
+      sources: [
+        {
+          publisher: "\uC5D1\uC2A4\uD3EC\uCE20\uB274\uC2A4 \xB7 \uBBF8\uC138\uC2A4 \uADF8\uB9B0 \uC560\uD50C \uB0B4\uD55C \uACF5\uC5F0 \uAE30\uC0AC",
+          url: "https://v.daum.net/v/20250216205013200",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
+    },
+    {
+      songId: "tj-90210",
+      number: "90210",
+      titleOriginal: "\u591C\u9DF9 - Yodaka(\u6620\u753B '\u30AD\u30F3\u30B0\u30C0\u30E0 \u9B42\u306E\u6C7A\u6226' OST)",
+      artistOriginal: "\u7C73\u6D25\u7384\u5E2B",
+      artistKo: "\uC694\uB124\uC988 \uCF04\uC2DC",
+      displayTitle: "\uC3D9\uB3C5\uC0C8",
+      subtitle: null,
+      aliases: [
+        "\uC694\uB2E4\uCE74"
+      ],
+      sources: [
+        {
+          publisher: "\uC9F1\uC9F1\uC774\uC758 \uC9F1\uC9F1\uD55C \uC77C\uC0C1",
+          url: "https://j-pop-playlist.tistory.com/101",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
+    },
+    {
+      songId: "tj-90201",
+      number: "90201",
+      titleOriginal: "\u611B\u3055\u308C\u306A\u304F\u3066\u3082 \u541B\u304C\u3044\u308B",
+      artistOriginal: "\u30D4\u30CE\u30AD\u30AA\u30D4\u30FC(Feat.\u521D\u97F3\u30DF\u30AF)",
+      artistKo: "\uD53C\uB178\uD0A4\uC624\uD53C (Feat. \uD558\uCE20\uB124 \uBBF8\uCFE0)",
+      displayTitle: "\uC0AC\uB791\uBC1B\uC9C0 \uBABB\uD574\uB3C4 \uB124\uAC00 \uC788\uC5B4",
+      subtitle: null,
+      aliases: [],
+      sources: [
+        {
+          publisher: "\uC9F1\uC9F1\uC774\uC758 \uC9F1\uC9F1\uD55C \uC77C\uC0C1",
+          url: "https://j-pop-playlist.tistory.com/423",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
+    },
+    {
+      songId: "tj-90198",
+      number: "90198",
+      titleOriginal: "\u30D1\u30E9\u30DC\u30E9(\u30A2\u30B5\u30D2\u98F2\u6599 '\u30AB\u30EB\u30D4\u30B9\u30A6\u30A9\u30FC\u30BF\u30FC' CM)",
+      artistOriginal: "Official\u9AED\u7537dism",
+      artistKo: "\uC624\uD53C\uC15C \uD788\uAC8C\uB2E8\uB514\uC998",
+      displayTitle: "\uD30C\uB77C\uBCFC\uB77C",
+      subtitle: null,
+      aliases: [],
+      sources: [
+        {
+          publisher: "\uC9F1\uC9F1\uC774\uC758 \uC9F1\uC9F1\uD55C \uC77C\uC0C1",
+          url: "https://j-pop-playlist.tistory.com/114",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
+    },
+    {
+      songId: "tj-90179",
+      number: "90179",
+      titleOriginal: "\u96F6-zero-(TV\u30A2\u30CB\u30E1 '\u30B9\u30CE\u30A6\u30DC\u30FC\u30EB\u30A2\u30FC\u30B9' OP)",
+      artistOriginal: "tuki.",
+      artistKo: "\uCE20\uD0A4.",
+      displayTitle: "\uC601 -zero-",
+      subtitle: null,
+      aliases: [],
+      sources: [
+        {
+          publisher: "\uC9F1\uC9F1\uC774\uC758 \uC9F1\uC9F1\uD55C \uC77C\uC0C1",
+          url: "https://j-pop-playlist.tistory.com/381",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
+    },
+    {
+      songId: "tj-90195",
+      number: "90195",
+      titleOriginal: "\u8EE2\u751F\u6797\u6A8E",
+      artistOriginal: "\u30D4\u30CE\u30AD\u30AA\u30D4\u30FC(Feat.\u521D\u97F3\u30DF\u30AF)",
+      artistKo: "\uD53C\uB178\uD0A4\uC624\uD53C (Feat. \uD558\uCE20\uB124 \uBBF8\uCFE0)",
+      displayTitle: "\uC804\uC0DD\uC0AC\uACFC",
+      subtitle: null,
+      aliases: [],
+      sources: [
+        {
+          publisher: "\uC9F1\uC9F1\uC774\uC758 \uC9F1\uC9F1\uD55C \uC77C\uC0C1",
+          url: "https://j-pop-playlist.tistory.com/423",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
+    },
+    {
+      songId: "tj-90194",
+      number: "90194",
+      titleOriginal: "\u30A4\u30C7\u30A2\u304C\u6EA2\u308C\u3066 \u7720\u308C\u306A\u3044(\u30C9\u30E9\u30DE '\u30B5\u30D0\u7F36, \u5B87\u5B99\u3078\u884C' OST)",
+      artistOriginal: "Vaundy",
+      artistKo: "\uBC14\uC6B4\uB514",
+      displayTitle: "\uC774\uB370\uC544\uAC00 \uB118\uCCD0\uC11C \uC7A0\uB4E4 \uC218 \uC5C6\uC5B4",
+      subtitle: null,
+      aliases: [],
+      sources: [
+        {
+          publisher: "\uC9F1\uC9F1\uC774\uC758 \uC9F1\uC9F1\uD55C \uC77C\uC0C1",
+          url: "https://j-pop-playlist.tistory.com/145",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
+    },
+    {
+      songId: "tj-90176",
+      number: "90176",
+      titleOriginal: "\u878D\u89E3sink",
+      artistOriginal: "Vaundy",
+      artistKo: "\uBC14\uC6B4\uB514",
+      displayTitle: "\uC735\uD574sink",
+      subtitle: null,
+      aliases: [
+        "\uC735\uD574 \uC2F1\uD06C"
+      ],
+      sources: [
+        {
+          publisher: "\uC9F1\uC9F1\uC774\uC758 \uC9F1\uC9F1\uD55C \uC77C\uC0C1",
+          url: "https://j-pop-playlist.tistory.com/145",
+          checkedOn: "2026-11-20",
+          note: "\uC6D0\uC81C\xB7\uAC00\uC218\xB7\uACE1 \uBC84\uC804\uC744 \uB300\uC870\uD55C \uD55C\uAD6D\uC5B4 \uC81C\uBAA9 \uD45C\uAE30. \uAC00\uC0AC\xB7\uD0C0\uC0AC \uBC88\uD638 \uBBF8\uBCF4\uAD00. TJ \uB4F1\uB85D \uC815\uBCF4\uB294 \uACF5\uC2DD \uC218\uC9D1 \uC99D\uAC70\uB97C \uADF8\uB300\uB85C \uC720\uC9C0."
+        }
+      ]
     }
   ]
 };
@@ -97007,14 +97366,21 @@ function applyResearchedTitle(song) {
   if (!entry) return song;
   const aliases = [...song.aliases];
   const add = (text, reviewed = true, generator = "legacy-reading-preserved") => {
-    if (aliases.some((a) => a.field === "title" && normalize(a.text) === normalize(text))) return;
-    aliases.push(reviewed ? { text, field: "title", kind: "reviewed", reviewer: entry.basis === "edited-reading" ? "\uC6D0\uC81C\xB7\uC77D\uAE30 \uADFC\uAC70 \uB300\uC870 \uD6C4 \uB3C5\uC74C \uD3B8\uC9D1 \xB7 2026-10-26" : "\uCD9C\uCC98 \uB300\uC870 \xB7 researched-titles-2026-10-26" } : { text, field: "title", kind: "generated", generator });
+    const existing = aliases.findIndex((a) => a.field === "title" && normalize(a.text) === normalize(text));
+    const alias = reviewed ? { text, field: "title", kind: "reviewed", reviewer: entry.basis === "edited-reading" ? "\uC6D0\uC81C\xB7\uC77D\uAE30 \uADFC\uAC70 \uB300\uC870 \uD6C4 \uB3C5\uC74C \uD3B8\uC9D1" : "\uCD9C\uCC98 \uB300\uC870 \xB7 " + entry.sources.map((s) => s.checkedOn).sort().at(-1) } : { text, field: "title", kind: "generated", generator };
+    if (existing >= 0) {
+      if (reviewed && aliases[existing].kind === "generated") aliases[existing] = alias;
+      return;
+    }
+    aliases.push(alias);
   };
   for (const text of [entry.displayTitle, ...entry.aliases]) add(text);
+  const preferredIndex = aliases.findIndex((a) => a.field === "title" && normalize(a.text) === normalize(entry.displayTitle));
+  if (preferredIndex > 0) aliases.unshift(...aliases.splice(preferredIndex, 1));
   if (song.titleKo !== entry.displayTitle) add(song.titleKo, song.localization?.title === "reviewed" || song.localization?.title === "official-reading");
   if (song.titleMeaningKo) add(song.titleMeaningKo.text, false, "legacy-literal-preserved");
   if (entry.artistKo && !aliases.some((a) => a.field === "artist" && normalize(a.text) === normalize(entry.artistKo))) aliases.push({ text: entry.artistKo, field: "artist", kind: "reviewed", reviewer: "\uCD9C\uCC98 \uB300\uC870 \xB7 researched-titles-2026-10-26" });
-  const artistKo = entry.artistKo && song.localization?.artist !== "reviewed" ? entry.artistKo : song.artistKo;
+  const artistKo = entry.artistKo && (entry.artistKoOverride || song.localization?.artist !== "reviewed") ? entry.artistKo : song.artistKo;
   if (artistKo !== song.artistKo && !aliases.some((a) => a.field === "artist" && normalize(a.text) === normalize(song.artistKo))) aliases.push(song.localization?.artist === "official-reading" ? { text: song.artistKo, field: "artist", kind: "reviewed", reviewer: "\uAE30\uC874 \uACF5\uC2DD \uB3C5\uC74C \uBCF4\uC874" } : { text: song.artistKo, field: "artist", kind: "generated", generator: "legacy-artist-reading-preserved" });
   const { titleMeaningKo: retiredLiteral, ...rest } = song;
   return { ...rest, titleKo: entry.displayTitle, artistKo, aliases, localization: { ...song.localization, title: "reviewed", artist: entry.artistKo ? "reviewed" : song.localization?.artist ?? "pending" } };
