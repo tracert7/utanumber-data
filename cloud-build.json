@@ -1,7 +1,7 @@
 {
-  "build": "2026-11-20-monthly-korean-review",
-  "builtAt": "2026-11-20T07:37:21.437Z",
-  "sourceCommit": "ea63ed155205b0e80e47766b1b900e6281fa84af",
+  "build": "2026-11-20-continuous-title-research",
+  "builtAt": "2026-11-20T08:10:09.427Z",
+  "sourceCommit": "48198d408d56a60484d1e02efc23d4f6fa10b971",
   "catalogSongs": 6645,
   "retiredMeanings": 0,
   "seedFiles": [
@@ -12,11 +12,31 @@
   "inputs": [
     {
       "file": "scripts/prepare-cloud-title-repair.ts",
-      "sha256": "c8f4affcb8119c1394675459b3295670d64ffc0bf2183ae0d9cb333c3994d254"
+      "sha256": "16b74be2264651e608ce50b655c317ccea3102f91406d6b58a8703459b39ce2a"
     },
     {
       "file": "scripts/refresh-discovery.ts",
-      "sha256": "c722eb1d5466f28d37c9ff6e9e89f1bcafc9ab1b3a671a5a8f175a8621b1843a"
+      "sha256": "3f50e7c5e7dde59d2de0e901ed39d87bd8fa44e52a9696e96394c463c18cf0f5"
+    },
+    {
+      "file": "scripts/research-discovery-titles.ts",
+      "sha256": "1773453eaa14d4ae01bc90c907eb02ca94d64b3f520df7d5c559e089a864add2"
+    },
+    {
+      "file": "scripts/lib/title-source.ts",
+      "sha256": "89319b92ae7ac6f10e20e89661385fba11c71718059dd8dde98c81d040fc168b"
+    },
+    {
+      "file": "scripts/lib/title-source-client.ts",
+      "sha256": "d905cf22418e23c17f61611d35431d59753beb2a217d69e47aa101676ce85c23"
+    },
+    {
+      "file": "scripts/lib/cloud-health.ts",
+      "sha256": "8c40e7f271421f80d210f4ca16a2f29624bb0d940b0e503c2808020fe09a7f8e"
+    },
+    {
+      "file": "data/title-research-sources.json",
+      "sha256": "3ec4cba0a75a4a823da96d5f74feba58e12de80e921ba5451de19bbbe0b79a98"
     },
     {
       "file": "scripts/validate-discovery.ts",
@@ -32,7 +52,7 @@
     },
     {
       "file": "src/researched-titles.ts",
-      "sha256": "2aee7a2d8cfd820108644371fa3b98e56584525b9f54a9604cb910b4eacd73fb"
+      "sha256": "7ccd4402567b36fb4d742837e4c8ffaaf1ce9b0ba7af099fa853b8157a140d1a"
     },
     {
       "file": "data/researched-titles.ko.json",
@@ -56,27 +76,27 @@
     },
     {
       "file": "deploy/cloud-entry.ts",
-      "sha256": "9e6f6f6190246d504ff6c2fdba2653e740a7bacb6a7239a0a47abcdaa7bd3f37"
+      "sha256": "ed9bfe1fb33af7983e625a8fe77572eb26a76b7ba6b783c5dbda69d103cb804c"
     },
     {
       "file": "deploy/cloud-health-entry.ts",
-      "sha256": "0da27601ca52218994a785d34c2988f298f30f8b56b6fb9cb11fa63a59886146"
+      "sha256": "01d8c1d34a29ecc469fdb96ea66f848884c48b0d0072c791cee62fe52f5c2bb5"
     },
     {
       "file": "deploy/cloud-self-test.mjs",
-      "sha256": "1653154ff9e6f0f0ffcbd12755d4c5ed755278cc9340518e713f3c3e0f6f8d0a"
+      "sha256": "26dacd1eae7c5af9256876e0dc2ea4e7c7187aa9fb7ef0271af5ae6cdaab555c"
     }
   ],
   "outputs": [
     {
       "file": "refresh.mjs",
-      "sha256": "90f7bc28e5a7dd7fd62b1d3eda8c14d249f3dbc6319afc193907742d117c54f8",
-      "bytes": 5758441
+      "sha256": "1374a60ccf9400fc53ea6b35bba4bde12118af0a48e2510e972babe3253f5762",
+      "bytes": 5999467
     },
     {
       "file": "monitor.mjs",
-      "sha256": "1ac67ba3ffc78cbfdd56a04d32d4cad8b360680198618827cca03d930bbe24ca",
-      "bytes": 5726797
+      "sha256": "9afe6aefd2ed38d586a53176b9408ad8b05db13c5113ee800dbc7ccdc0c390d2",
+      "bytes": 5731829
     },
     {
       "file": "seed.json.gz",
@@ -85,8 +105,8 @@
     },
     {
       "file": "cloud-self-test.mjs",
-      "sha256": "1653154ff9e6f0f0ffcbd12755d4c5ed755278cc9340518e713f3c3e0f6f8d0a",
-      "bytes": 8283
+      "sha256": "26dacd1eae7c5af9256876e0dc2ea4e7c7187aa9fb7ef0271af5ae6cdaab555c",
+      "bytes": 11168
     },
     {
       "file": "package.json",

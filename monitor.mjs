@@ -97322,6 +97322,26 @@ var discovery_researched_titles_ko_default = {
   ]
 };
 
+// src/title-text.ts
+var containsJapanese = (text) => /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]/u.test(text);
+function titleWithoutTieIn(text) {
+  let output = "", depth = 0, start = 0;
+  for (let i = 0; i < text.length; i++) {
+    if (/[（(]/.test(text[i])) {
+      if (depth === 0) start = i;
+      depth++;
+    } else if (/[）)]/.test(text[i]) && depth) {
+      depth--;
+      if (depth === 0) {
+        const group = text.slice(start, i + 1);
+        if (!/\b(?:OST|OP\d*|ED\d*|CM|TVCM)\b|OFFICIAL SONG|WINTER SPECIAL|Character\s*Song|挿入歌|主題歌|テーマソング|プロジェクト[^)]*ソング|ヒプノシスマイク|NHK\d+(?:祭)?ソング|ウタ from ONE PIECE FILM RED|^[(（]蒼穹のファフナー RIGHT OF LEFT[)）]$/i.test(group)) output += group;
+      }
+    } else if (depth === 0) output += text[i];
+  }
+  if (depth) output += text.slice(start);
+  return output.trim();
+}
+
 // src/researched-titles.ts
 var researchedTitles = [...researched_titles_ko_default.entries, ...edited_readings_ko_default.entries.filter((e) => !researched_titles_ko_default.entries.some((p) => p.songId === e.songId))];
 if (new Set(researchedTitles.map((e) => e.number)).size !== researchedTitles.length || new Set(researchedTitles.map((e) => e.songId)).size !== researchedTitles.length) throw Error("Duplicate researched song identity");
@@ -97370,7 +97390,26 @@ var discoverySchema = z2.object({
 var staleDiscovery = (checkedAt, now = Date.now()) => now - Date.parse(checkedAt) > 12 * 36e5;
 
 // scripts/lib/cloud-health.ts
+import { z as z3 } from "zod";
 var cloudEndpoint = "https://tracert7.github.io/utanumber-data/discovery.json";
+var titleResearchEndpoint = "https://tracert7.github.io/utanumber-data/title-research.json";
+var researchReport = z3.object({ schemaVersion: z3.literal(1), checkedAt: z3.string().datetime(), feedUpdatedAt: z3.string().datetime(), monthlyTotal: z3.number().int().nonnegative(), monthlyAnnotated: z3.number().int().nonnegative(), dynamicReviewed: z3.number().int().nonnegative(), alertAfterHours: z3.literal(24), pending: z3.array(z3.object({ songId: z3.string(), number: z3.string().regex(/^\d+$/), status: z3.string(), firstSeenAt: z3.string().datetime(), requiresKorean: z3.boolean() })), errors: z3.array(z3.string()), blockedSources: z3.array(z3.object({ source: z3.string(), status: z3.number(), at: z3.string().datetime() })) });
+function inspectTitleResearch(input, feed, now = Date.now()) {
+  const report2 = researchReport.parse(input), reasons = [];
+  if (report2.feedUpdatedAt !== feed.updatedAt) reasons.push("title-research-feed-mismatch");
+  if (staleDiscovery(report2.checkedAt, now)) reasons.push("stale-title-research");
+  if (Date.parse(report2.checkedAt) > now + 5 * 6e4) reasons.push("future-title-research");
+  const ids = new Map(feed.monthly?.entries.map((e) => [e.song.id, e.song.registrations.tj.number]) ?? []);
+  if (report2.monthlyTotal !== ids.size || report2.monthlyAnnotated + report2.pending.length !== ids.size || new Set(report2.pending.map((p) => p.songId)).size !== report2.pending.length || report2.pending.some((p) => ids.get(p.songId) !== p.number)) reasons.push("invalid-title-research-coverage");
+  const annotated = (song) => [song.localization?.title === "reviewed" || song.localization?.title === "official-reading" ? song.titleKo : "", ...song.aliases.filter((a) => a.field === "title" && a.kind === "reviewed").map((a) => a.text)].some((t) => /[가-힣]/.test(t) && !containsJapanese(t));
+  const missing = (feed.monthly?.entries ?? []).filter((e) => containsJapanese(titleWithoutTieIn(e.song.titleOriginal)) && !annotated(e.song));
+  if (missing.some((e) => !report2.pending.some((p) => p.songId === e.song.id && p.requiresKorean)) || report2.pending.some((p) => Date.parse(p.firstSeenAt) > Date.parse(report2.checkedAt) || p.requiresKorean !== containsJapanese(titleWithoutTieIn(feed.monthly.entries.find((e) => e.song.id === p.songId)?.song.titleOriginal ?? "")))) reasons.push("invalid-title-research-coverage");
+  const required = report2.pending.filter((p) => p.requiresKorean), overdue = required.filter((p) => now - Date.parse(p.firstSeenAt) > 24 * 36e5);
+  if (overdue.length) reasons.push("unresolved-monthly-korean");
+  if (report2.errors.some((e) => e.startsWith("research-state-error:"))) reasons.push("title-research-state-error");
+  if (required.length && report2.blockedSources.length) reasons.push("title-source-access-blocked");
+  return { reasons, titleResearch: { monthlyAnnotated: report2.monthlyAnnotated, pending: report2.pending.length, overdue: overdue.length, dynamicReviewed: report2.dynamicReviewed, checkedAt: report2.checkedAt } };
+}
 function inspectCloudFeed(input, now = Date.now()) {
   const feed = discoverySchema.parse(input);
   const reasons = [];
@@ -97425,8 +97464,20 @@ async function checkCloud(options = {}) {
     if (!response.headers.get("content-type")?.includes("application/json")) reasons.push("invalid-content-type");
     if (response.headers.get("access-control-allow-origin") !== "*") reasons.push("missing-public-cors");
     try {
-      const inspected = inspectCloudFeed(await response.json(), now());
-      return { ...base(), ...inspected, attempts, healthy: inspected.healthy && !reasons.length, reasons: [...reasons, ...inspected.reasons] };
+      const input = await response.json(), inspected = inspectCloudFeed(input, now());
+      let titles;
+      if (options.titleResearch) try {
+        const titleResponse = await fetcher(titleResearchEndpoint, { cache: "no-store", signal: AbortSignal.timeout(2e4) });
+        if (!titleResponse.ok) reasons.push("title-research-http-" + titleResponse.status);
+        else if (!titleResponse.headers.get("content-type")?.includes("application/json") || titleResponse.headers.get("access-control-allow-origin") !== "*") reasons.push("invalid-title-research-response");
+        else {
+          titles = inspectTitleResearch(await titleResponse.json(), discoverySchema.parse(input), now());
+          reasons.push(...titles.reasons);
+        }
+      } catch {
+        reasons.push("title-research-unavailable-or-invalid");
+      }
+      return { ...base(), ...inspected, ...titles ? { titleResearch: titles.titleResearch } : {}, attempts, healthy: inspected.healthy && !reasons.length, reasons: [...reasons, ...inspected.reasons] };
     } catch {
       return { ...base(), healthy: false, attempts, reasons: [...reasons, "invalid-schema-or-json"] };
     }
@@ -97435,7 +97486,7 @@ async function checkCloud(options = {}) {
 }
 
 // deploy/cloud-health-entry.ts
-var report = await checkCloud();
+var report = await checkCloud({ titleResearch: true });
 await fs.mkdir(".health", { recursive: true });
 await fs.writeFile(".health/cloud-health.json", JSON.stringify(report, null, 2) + "\n");
 if (process.env.GITHUB_STEP_SUMMARY) {
@@ -97447,6 +97498,8 @@ if (process.env.GITHUB_STEP_SUMMARY) {
     `- Data updated: ${report.updatedAt ?? "unavailable"}`,
     `- Monthly songs: ${report.monthly ?? "unavailable"}`,
     `- JPOP TOP100: ${report.top100 ?? "unavailable"}`,
+    `- Monthly Korean titles: ${report.titleResearch?.monthlyAnnotated ?? "unavailable"}`,
+    `- Korean research pending/overdue: ${report.titleResearch?.pending ?? "unavailable"}/${report.titleResearch?.overdue ?? "unavailable"}`,
     `- Reasons: ${report.reasons.join(", ") || "none"}`,
     "",
     "Read-only public JSON check. No TJ collection or data publishing.",

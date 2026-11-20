@@ -29,8 +29,15 @@ const originalTimeout=globalThis.setTimeout;
 globalThis.setTimeout=(fn,ms,...args)=>originalTimeout(fn,ms<=5000?0:ms,...args);
 process.on('exit',()=>fs.writeFileSync('fixture-calls.json',JSON.stringify(calls)));
 globalThis.fetch=async(input,options={})=>{
- const u=new URL(String(input));calls.push({path:u.pathname,method:options.method??'GET'});
+ const u=new URL(String(input));calls.push({origin:u.origin,path:u.pathname,method:options.method??'GET'});
  if(u.origin==='https://tracert7.github.io'&&u.pathname==='/utanumber-data/discovery.json')return new Response(fs.readFileSync('public/discovery.json','utf8'),{headers:{'content-type':'application/json','access-control-allow-origin':'*'}});
+ if(u.origin==='https://tracert7.github.io'&&u.pathname==='/utanumber-data/title-research.json')return new Response(fs.readFileSync('public/title-research.json','utf8'),{headers:{'content-type':'application/json','access-control-allow-origin':'*'}});
+ if(u.hostname.endsWith('.tistory.com')){
+  if(u.pathname==='/robots.txt')return new Response('User-agent: *\nDisallow: /search/\nAllow: /\n');
+  // A real formerly-pending TJ identity, replayed only inside this isolated test.
+  if(u.hostname==='j-pop-playlist.tistory.com'&&u.pathname==='/341')return new Response('<div class="contents_style"><blockquote>마르시<br>マルシィ</blockquote><table><tr><td>곡명</td><td>가수명</td></tr><tr><td>アリカ<br>있는 곳</td><td>マルシィ<br>마르시</td></tr></table></div>');
+  return new Response('<rss><channel></channel></rss>');
+ }
  if(u.origin!=='https://www.tjmedia.com')throw Error('Unexpected fixture origin');
  if(rows.mode==='blocked')return new Response('',{status:403});
  if(u.pathname==='/robots.txt')return new Response('User-agent: *\nAllow: /\n');
@@ -45,11 +52,19 @@ globalThis.fetch=async(input,options={})=>{
 };
 `;
 const notes=[];
-for(const mode of ['normal','monthly-failure','blocked']){
+for(const mode of ['normal','title-research','monthly-failure','blocked']){
  const root=await fs.mkdtemp(path.join(os.tmpdir(),'utanumber-cloud-fixture-'));
  try{
   const input=structuredClone(seed),saved=structuredClone(state);
   saved['data/discovery/request-state.json']={lastAt:0,blocked:false};
+  saved['data/discovery/title-research-state.json']={schemaVersion:1,entries:[],queue:{},sources:{},cache:{}};
+  if(mode==='title-research')for(const name of ['public/discovery.json','data/discovery/snapshot.json']){
+   const feed=saved[name];for(const s of [...feed.archive,...feed.monthly.entries.map(e=>e.song),...feed.top100.entries.map(e=>e.song)])if(s.registrations.tj.number==='90216'){
+    // Alter only the internal ID in this isolated fixture so the compiled static
+    // dictionary cannot solve it. The real title/artist/TJ number are retained.
+    s.id='fixture-research-90216';s.titleKo=s.titleOriginal;s.aliases=[];s.localization.title='pending';
+   }
+  }
   const chart=before.top100.entries.map(e=>({pro:e.song.registrations.tj.number,indexTitle:e.song.titleOriginal,indexSong:e.song.artistOriginal,rank:e.rank}));
   const monthly=before.monthly.entries.map(e=>({pro:e.song.registrations.tj.number,indexTitle:e.song.titleOriginal,indexSong:e.song.artistOriginal,publishdate:fixtureMonth+'-'+e.addedOn.slice(-2)}));
   const numbers=new Set(monthly.map(row=>row.pro));
@@ -70,7 +85,7 @@ for(const mode of ['normal','monthly-failure','blocked']){
   const feed=JSON.parse(await fs.readFile(path.join(root,'public/discovery.json'),'utf8'));
   const calls=JSON.parse(await fs.readFile(path.join(root,'fixture-calls.json'),'utf8'));
   assert.equal(feed.top100.entries.length,100);
-  if(mode==='normal'){
+  if(mode==='normal'||mode==='title-research'){
    assert.equal(refreshed.status,0,refreshed.stdout+refreshed.stderr);
    assert.equal(feed.errors.length,0);assert.equal(feed.monthly.entries.length,monthly.length);
    assert.ok(Date.parse(feed.monthly.checkedAt)>Date.parse(before.monthly.checkedAt));
@@ -86,6 +101,17 @@ for(const mode of ['normal','monthly-failure','blocked']){
    }
    const monitored=run('monitor.mjs');assert.ifError(monitored.error);assert.equal(monitored.status,0,monitored.stdout+monitored.stderr);
    const health=JSON.parse(await fs.readFile(path.join(root,'.health/cloud-health.json'),'utf8'));assert.equal(health.healthy,true);
+   if(mode==='title-research'){
+    const song=feed.monthly.entries.find(e=>e.song.id==='fixture-research-90216').song;
+    assert.equal(song.titleKo,'있는 곳');assert.equal(song.registrations.tj.number,'90216');assert.equal(song.aliases.find(a=>a.field==='title'&&a.kind==='reviewed').text,'있는 곳');
+    const registry=JSON.parse(await fs.readFile(path.join(root,'data/discovery/title-research-state.json'),'utf8'));
+    assert.equal(registry.entries.find(e=>e.songId===song.id).verification.method,'exact-original-artist-version');
+    const second=run('refresh.mjs');assert.ifError(second.error);assert.equal(second.status,0,second.stdout+second.stderr);
+    const replay=JSON.parse(await fs.readFile(path.join(root,'fixture-calls.json'),'utf8'));assert.ok(!replay.some(c=>c.origin==='https://j-pop-playlist.tistory.com'&&c.path==='/341'),'Resolved source must not refetch on restart');
+    const persisted=JSON.parse(gunzipSync(await fs.readFile(path.join(root,'state.json.gz'))).toString('utf8'));
+    assert.equal(persisted['data/discovery/title-research-state.json'].entries.filter(e=>e.songId===song.id).length,1);
+    assert.equal(persisted['public/discovery.json'].monthly.entries.find(e=>e.song.id===song.id).song.titleKo,'있는 곳');
+   }
    notes.push({case:mode,monthly:feed.monthly.entries.length,top100:100,monitorHealthy:health.healthy});
   }else{
    assert.equal(refreshed.status,1,refreshed.stdout+refreshed.stderr);
@@ -93,7 +119,7 @@ for(const mode of ['normal','monthly-failure','blocked']){
    assert.ok(feed.errors.length);
    const monitored=run('monitor.mjs');assert.equal(monitored.status,1,'Failure must still alert');
    if(mode==='blocked'){
-    assert.equal(calls.length,1,'403 must never retry');
+    assert.equal(calls.filter(c=>c.origin==='https://www.tjmedia.com').length,1,'403 must never retry');
     const persisted=JSON.parse(gunzipSync(await fs.readFile(path.join(root,'state.json.gz'))).toString('utf8'));
     assert.equal(persisted['data/discovery/request-state.json'].blocked.status,403);
     assert.equal(persisted['data/discovery/request-state.json'].blocked.path,'/robots.txt');
